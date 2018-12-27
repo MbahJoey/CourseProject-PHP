@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Title;
 
 class TitlesController extends Controller
 {
@@ -13,7 +14,8 @@ class TitlesController extends Controller
      */
     public function index()
     {
-        //
+        $titles = Title::all();
+        return view('titles.index') -> with('titles', $titles);
     }
 
     /**
@@ -23,7 +25,7 @@ class TitlesController extends Controller
      */
     public function create()
     {
-        //
+        return view('titles.create');
     }
 
     /**
@@ -34,7 +36,21 @@ class TitlesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validation
+        $this->validate($request, [
+            'name' => 'required' ,
+            'author' => 'required',
+            'type' =>'required',
+        ]);
+
+        //Create
+        $titles = new Title;
+        $titles->name = $request ->input('name');
+        $titles->author = $request ->input('author');
+        $titles->type = $request ->input('type');
+        $titles->save();
+
+        return redirect('/titles')->with('success','Title Created');
     }
 
     /**
@@ -45,7 +61,8 @@ class TitlesController extends Controller
      */
     public function show($id)
     {
-        //
+        $titles = Title::find($id);
+        return view('titles.show') -> with('titles', $titles);
     }
 
     /**

@@ -19,6 +19,7 @@ class CreateTitlesTable extends Migration
             $table->string('name');
             $table->string('author');
             $table->string('type');
+            $table->dateTime('pdate');
         });
     }
 

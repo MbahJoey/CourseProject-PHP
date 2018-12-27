@@ -13,7 +13,7 @@ class TypesController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.types');
     }
 
     /**
@@ -45,7 +45,7 @@ class TypesController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
