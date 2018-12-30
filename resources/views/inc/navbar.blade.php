@@ -6,14 +6,14 @@
 
  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/titles">Titles</a>
+            <li class="nav-item ">
+                <a class="nav-link " href="/titles">Titles</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a class="nav-link" href="/types">Types</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/authors">Authors</a>
+            <li class="nav-item" >
+                <a class="nav-link " href="/authors">Authors</a>
             </li>
         </ul>
     </div>
