@@ -13,10 +13,10 @@
         </thead>
         <tbody0>
             <tr>
-                <td>{{$titles->name}}</td>
-                <td>{{$titles->author}}</td>
-                <td>{{$titles->type}}</td>
-                <td>{{$titles->pdate}}</td>
+                <td>{{$titles['name']}}</td>
+                <td>{{$titles['author']}}</td>
+                <td>{{$titles['name']}}</td>
+                <td>{{$titles['pdate']}}</td>
             </tr>
         </tbody0>
     </table>

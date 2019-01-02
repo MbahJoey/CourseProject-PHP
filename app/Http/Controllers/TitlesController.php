@@ -37,20 +37,21 @@ class TitlesController extends Controller
     public function store(Request $request)
     {
         //Validation
-        $this->validate($request, [
-            'name' => 'required' ,
-            'author' => 'required',
+        $this->validate($request, array(
+            'name' => 'required|min:3',
+            'author' => 'required|min:3',
             'type' =>'required',
-        ]);
+            'pdate' =>'required'
+        ));
 
         //Create
         $titles = new Title;
-        $titles->name = $request ->input('name');
-        $titles->author = $request ->input('author');
-        $titles->type = $request ->input('type');
+        $titles['name'] = $request ->get('name');
+        $titles['author'] = $request ->get('author');
+        $titles['type'] = $request ->get('type');
+        $titles->pdate = $request ->get('pdate');
         $titles->save();
-
-        return redirect('/titles')->with('success','Title Created');
+        return view('titles.show') -> with('titles', $titles);
     }
 
     /**
