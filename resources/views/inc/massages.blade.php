@@ -18,6 +18,12 @@
     </div>
 @endif
 
+@if (session('update'))
+    <div class="alert alert-success">
+        {{('Updated Successfully')}}
+    </div>
+@endif
+
 @if(session('error'))
     <div class="alert alert-danger">
        session {{('error')}}

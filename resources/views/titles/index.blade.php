@@ -9,6 +9,8 @@
                         <th>Title</th>
                         <th>Author</th>
                         <th>Type</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,7 +25,7 @@
                                 <button class="btn btn-danger" type="submit">Delete</button>
                             </form>
                         </td>
-                        <td><a href="/titles/{{$title->id}}" class="btn btn-outline-info" role="button">Edit</a></td>
+                        <td><a href="/titles/{{$title->id}}/edit" class="btn btn-info" role="button">Edit</a></td>
 
                     </tr>
                 </tbody>

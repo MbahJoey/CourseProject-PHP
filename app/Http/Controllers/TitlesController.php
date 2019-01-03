@@ -96,13 +96,13 @@ class TitlesController extends Controller
         ));
 
         //Update
-        $titles = new Title;
+        $titles = Title::find($id);
         $titles['name'] = $request ->get('name');
         $titles['author'] = $request ->get('author');
         $titles['type'] = $request ->get('type');
-        $titles->pdate = $request ->get('pdate');
+        $titles['pdate'] = $request ->get('pdate');
         $titles->save();
-        return view('titles.show') -> with('titles', $titles);
+        return redirect('/titles') -> with('update', 'Updated');
     }
 
     /**
