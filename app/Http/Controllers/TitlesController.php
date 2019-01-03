@@ -49,9 +49,9 @@ class TitlesController extends Controller
         $titles['name'] = $request ->get('name');
         $titles['author'] = $request ->get('author');
         $titles['type'] = $request ->get('type');
-        $titles->pdate = $request ->get('pdate');
+        $titles['pdate'] = $request ->get('pdate');
         $titles->save();
-        return view('titles.show') -> with('titles', $titles);
+        return redirect('/titles') -> with('success', 'Created');
     }
 
     /**
@@ -74,7 +74,8 @@ class TitlesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $titles = Title::find($id);
+        return view('titles.edit') -> with('titles', $titles);
     }
 
     /**
@@ -86,7 +87,22 @@ class TitlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Validation
+        $this->validate($request, array(
+            'name' => 'required|min:3',
+            'author' => 'required|min:3',
+            'type' =>'required',
+            'pdate' =>'required'
+        ));
+
+        //Update
+        $titles = new Title;
+        $titles['name'] = $request ->get('name');
+        $titles['author'] = $request ->get('author');
+        $titles['type'] = $request ->get('type');
+        $titles->pdate = $request ->get('pdate');
+        $titles->save();
+        return view('titles.show') -> with('titles', $titles);
     }
 
     /**
@@ -97,6 +113,9 @@ class TitlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $titles = Title::find($id);
+        $titles->delete();
+
+        return redirect('/titles') -> with('delete', 'Deleted');
     }
 }

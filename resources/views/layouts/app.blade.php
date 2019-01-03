@@ -21,6 +21,7 @@
 <body>
     <div>@include('inc.navbar')</div>
     <div class="container">
+        @include('inc.massages')
         @yield('content')
     </div>
 </body>

@@ -17,8 +17,14 @@
                         <td><a href="/titles/{{$title->id}}">{{$title->name}}</a></td>
                         <td>{{$title->author}}</td>
                         <td>{{$title->type}}</td>
-                        <td ><a href="/titles" class="btn btn-danger" role="button">Delete</a></td>
-                        <td><a href="/titles/edit" class="btn btn-outline-info" role="button">Edit</a></td>
+                        <td><form action="{{action('TitlesController@destroy', $title->id )}}" method="post">
+                                {{csrf_field()}}
+                                <input name="_method" type="hidden" value="DELETE">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </td>
+                        <td><a href="/titles/{{$title->id}}" class="btn btn-outline-info" role="button">Edit</a></td>
+
                     </tr>
                 </tbody>
 
