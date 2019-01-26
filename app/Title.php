@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Title extends Model
 {
-    //Primary Key
-    //public $primaryKey = 'title_id';
+    protected $fillable = [
+        'name', 'author', 'type', 'pdate',
+    ];
 }

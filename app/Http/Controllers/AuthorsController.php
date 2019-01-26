@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Author;
 use Illuminate\Http\Request;
 
 class AuthorsController extends Controller
@@ -13,7 +14,8 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        return view('pages.authors');
+        $authors = Author::all();
+        return view('authors.index') -> with('authors', $authors);
     }
 
     /**
@@ -23,7 +25,7 @@ class AuthorsController extends Controller
      */
     public function create()
     {
-        //
+        return view('authors.create');
     }
 
     /**
@@ -34,7 +36,18 @@ class AuthorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validation
+        $this->validate($request, array(
+            'firstName' => 'required|min:3',
+            'lastName' => 'required|min:3',
+        ));
+
+        //Create
+        $authors = new Author;
+        $authors['firstName'] = $request ->get('firstName');
+        $authors['lastName'] = $request ->get('lastName');
+        $authors->save();
+        return redirect('/authors') -> with('success', 'Created');
     }
 
     /**
@@ -45,7 +58,8 @@ class AuthorsController extends Controller
      */
     public function show($id)
     {
-        //
+        $authors = Author::find($id);
+        return view('authors.show') -> with('authors', $authors);
     }
 
     /**
@@ -56,7 +70,8 @@ class AuthorsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $authors = Author::find($id);
+        return view('authors.edit') -> with('authors', $authors);
     }
 
     /**
@@ -68,7 +83,18 @@ class AuthorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Validation
+        $this->validate($request, array(
+            'firstName' => 'required|min:3',
+            'lastName' => 'required|min:3',
+        ));
+
+        //Create
+        $authors = Author::find($id);
+        $authors['firstName'] = $request ->get('firstName');
+        $authors['lastName'] = $request ->get('lastName');
+        $authors->save();
+        return redirect('/authors') -> with('update', 'Updated');
     }
 
     /**
@@ -79,6 +105,9 @@ class AuthorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $authors = Author::find($id);
+        $authors->delete();
+
+        return redirect('/authors') -> with('delete', 'Deleted');
     }
 }

@@ -4,8 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static find(int $id)
+ */
 class Type extends Model
 {
-    //
-    public $primaryKey = 'type_id';
+    protected $fillable = [
+        'name',
+        ];
 }

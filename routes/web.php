@@ -14,7 +14,7 @@
 */
 
 Route::get('/', function () {
-    return view('pages.index');
+    return view('index');
 });
 
 Auth::routes();
@@ -25,3 +25,9 @@ Route::resource('/titles', 'TitlesController');
 Route::resource('/authors', 'AuthorsController');
 Route::resource('/types', 'TypesController');
 
+Route::post('/search', 'SearchController@SearchByAuthor');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
