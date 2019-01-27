@@ -24,8 +24,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/titles', 'TitlesController');
 Route::resource('/authors', 'AuthorsController');
 Route::resource('/types', 'TypesController');
+Route::resource('/images', 'ImagesController');
 
-Route::post('/search', 'SearchController@SearchByAuthor');
+Route::post('authors.result', 'SearchController@SearchByAuthor');
+Route::post('titles.result', 'SearchController@SearchByAuthor');
+Route::post('types.result', 'SearchController@SearchByAuthor');
 
 
 Auth::routes();

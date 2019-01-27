@@ -11,7 +11,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Type</th>
-                        <th>Actions</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,13 +19,17 @@
                     <tr>
                         <td>{{$type->id}}</td>
                         <td><a href="/types/{{$type->id}}">{{$type->name}}</a></td>
-                        <td><form action="{{action('TypesController@destroy', $type->id )}}" method="post">
+
+                        <td>
+                        @if(!Auth::guest())
+                        <form action="{{action('TypesController@destroy', $type->id )}}" method="post">
                                 {{csrf_field()}}
                                 <input name="_method" type="hidden" value="DELETE">
                                 <button class="btn btn-danger" type="submit">Delete</button>
                         <a href="/types/{{$type->id}}/edit" class="btn btn-info" role="button">Edit</a>
-                            </form> </td>
-
+                            </form>
+                        @endif
+                        </td>
                     </tr>
                 </tbody>
 
@@ -34,7 +38,9 @@
             <p>No titles found</p>
     @endif
             </table>
-            <div class="float-right">
-                <a href="/types/create" class="btn btn-primary" role="button">Create</a>
-            </div>
+            @if(!Auth::guest())
+                <div class="float-right">
+                    <a href="/types/create" class="btn btn-primary" role="button">Create</a>
+                </div>
+            @endif
 @endsection

@@ -21,12 +21,16 @@
                         <td><a href="/titles/{{$title->id}}">{{$title->name}}</a></td>
                         <td>{{$title->author}}</td>
                         <td>{{$title->type}}</td>
-                        <td><form action="{{action('TitlesController@destroy', $title->id )}}" method="post">
+                        <td>
+                            @if(!Auth::guest())
+                            <form action="{{action('TitlesController@destroy', $title->id )}}" method="post">
                                 {{csrf_field()}}
                                 <input name="_method" type="hidden" value="DELETE">
                                 <button class="btn btn-danger" type="submit">Delete</button>
                         <a href="/titles/{{$title->id}}/edit" class="btn btn-info" role="button">Edit</a>
-                            </form></td>
+                            </form>
+                            @endif
+                        </td>
                     </tr>
                 </tbody>
 
@@ -35,7 +39,10 @@
             <p>No titles found</p>
     @endif
             </table>
+
+            @if(!Auth::guest())
             <div class="float-right">
                 <a href="/titles/create" class="btn btn-primary" role="button">Create</a>
             </div>
+            @endif
 @endsection

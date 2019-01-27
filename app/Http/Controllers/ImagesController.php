@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Type;
+use App\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-class TypesController extends Controller
+class ImagesController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -16,6 +17,7 @@ class TypesController extends Controller
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,8 +25,8 @@ class TypesController extends Controller
      */
     public function index()
     {
-        $types = Type::all();
-        return view('types.index')-> with('types', $types);
+        $images = Image::all();
+        return view('images.index') -> with('images', $images);
     }
 
     /**
@@ -34,7 +36,7 @@ class TypesController extends Controller
      */
     public function create()
     {
-        return view('types.create');
+        return view('images.create');
     }
 
     /**
@@ -48,38 +50,39 @@ class TypesController extends Controller
     {
         //Validation
         $this->validate($request, array(
-            'name' => 'required|min:3',
+            'imageDescription' => 'required',
+            'customImage' => 'required|image|mimes:jpeg,png|max:2048',
         ));
 
-        //Create
-        $types = new Type;
-        $types['name'] = $request ->get('name');
-        $types->save();
-        return redirect('/types') -> with('success', 'Created');
+        $path = $request->file('customImage')->store('public/images');
+        $images = new Image([
+            'fileName' => basename($path),
+            'imageDescription' => $request->get('imageDescription')
+        ]);
+        $images->save();
+        return redirect('images')->with('upload', 'Uploaded');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     * @return void
      */
     public function show($id)
     {
-        $types = Type::find($id);
-        return view('types.show') -> with('types', $types);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     * @return void
      */
     public function edit($id)
     {
-        $types = Type::find($id);
-        return view('types.edit') -> with('types', $types);
+        //
     }
 
     /**
@@ -87,21 +90,11 @@ class TypesController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @return void
      */
     public function update(Request $request, $id)
     {
-        //Validation
-        $this->validate($request, array(
-            'name' => 'required|min:3',
-        ));
-
-        //Create
-        $types = Type::find($id);
-        $types['name'] = $request ->get('name');
-        $types->save();
-        return redirect('/types') -> with('update', 'Updated');
+        //
     }
 
     /**
@@ -112,9 +105,9 @@ class TypesController extends Controller
      */
     public function destroy($id)
     {
-        $types = Type::find($id);
-        $types->delete();
-
-        return redirect('/types') -> with('delete', 'Deleted');
+        $images = Image::find($id);
+        Storage::delete('public/images/' . $images->fileName);
+        $images->delete();
+        return redirect('/images')->with('delete', 'Image was deleted!');
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <div class="form-group">
     <form action="/authors" method="post">
         {{ csrf_field() }}
         <div class="form-group">
@@ -18,5 +18,5 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
-
+    </div>
 @endsection

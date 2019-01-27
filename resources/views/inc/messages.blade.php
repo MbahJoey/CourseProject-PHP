@@ -29,3 +29,9 @@
        session {{('error')}}
     </div>
 @endif
+
+@if (session('upload'))
+    <div class="alert alert-success">
+        {{('Uploaded Successfully')}}
+    </div>
+@endif

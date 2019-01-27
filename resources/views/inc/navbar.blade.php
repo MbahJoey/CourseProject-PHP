@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary" xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Scientific Publications') }}
@@ -8,18 +8,36 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item ">
-                    <a class="nav-link " href="/titles">Titles</a>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::path() ==  'titles' ? 'active' : ''  }}" href="/titles">Titles</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="/types">Types</a>
+                    <a class="nav-link {{ Request::path() ==  'types' ? 'active' : ''  }}"  href="/types">Types</a>
                 </li>
                 <li class="nav-item" >
-                    <a class="nav-link " href="/authors">Authors</a>
+                    <a class="nav-link {{ Request::path() ==  'authors' ? 'active' : ''  }}" href="/authors">Authors</a>
                 </li>
             </ul>
+
+
+        <!-- Searchbar -->
+            <form action="{{action("SearchController@SearchByAuthor")}}" method="POST" role="search">
+                {{ csrf_field() }}
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q"
+                           placeholder="Author, type or title"> <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-search">Search</span>
+            </button>
+        </span>
+                </div>
+            </form>
+
+
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
@@ -45,6 +63,7 @@
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
+                            <a class="dropdown-item" href="/images">View Images</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
