@@ -1,1 +1,1 @@
-# CourseProject
+Scientific publications system that show all added Scientiffic publications, their authors and their types. It has the possibility to login/register and add new Titles, authors or types, or just see the existing ones without logging/registering. There is also a gallery to the system where only users can see the existing images or upload new ones/dlete old ones.
