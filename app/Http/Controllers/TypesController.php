@@ -23,7 +23,7 @@ class TypesController extends Controller
      */
     public function index()
     {
-        $types = Type::all();
+        $types = Type::orderBy('name', 'desc')->paginate(5);
         return view('types.index')-> with('types', $types);
     }
 

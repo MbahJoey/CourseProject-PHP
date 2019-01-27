@@ -43,4 +43,5 @@
                     <a href="/types/create" class="btn btn-primary" role="button">Create</a>
                 </div>
             @endif
+            {{$types->links()}}
 @endsection

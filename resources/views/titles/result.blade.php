@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <p></p>
+
     <div class="container">
     @if(isset($details))
         <table class="table table-striped">

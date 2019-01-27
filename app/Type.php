@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Title;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -12,4 +13,8 @@ class Type extends Model
     protected $fillable = [
         'name',
         ];
+
+    public function titles(){
+        return $this->hasMany('App\Title');
+    }
 }

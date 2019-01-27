@@ -41,4 +41,5 @@
                     <a href="/authors/create" class="btn btn-primary" role="button">Create</a>
                 </div>
             @endif
+            {{$authors->links()}}
 @endsection

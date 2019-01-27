@@ -24,7 +24,7 @@ class TitlesController extends Controller
      */
     public function index()
     {
-        $titles = Title::all();
+        $titles = Title::orderBy('name', 'desc')->paginate(5);
         return view('titles.index') -> with('titles', $titles);
     }
 

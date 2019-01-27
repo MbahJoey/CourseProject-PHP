@@ -16,7 +16,6 @@
                                 </div>
                             </div>
 
-
                         @if(!Auth::guest())
                             <form action="{{action('ImagesController@destroy', $image->id )}}" method="post">
                                 {{csrf_field()}}

@@ -25,6 +25,8 @@
 
 
         <!-- Searchbar -->
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
             <form action="{{action("SearchController@SearchByAuthor")}}" method="POST" role="search">
                 {{ csrf_field() }}
                 <div class="input-group">
@@ -36,8 +38,8 @@
         </span>
                 </div>
             </form>
-
-
+            </li>
+            </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
@@ -63,7 +65,7 @@
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
-                            <a class="dropdown-item" href="/images">View Images</a>
+                            <a class="dropdown-item" href="/images">Gallery</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
